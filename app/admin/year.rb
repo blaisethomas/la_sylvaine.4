@@ -1,4 +1,5 @@
 ActiveAdmin.register Year do
+  permit_params :year, :price
 
 
   # See permitted parameters documentation:
