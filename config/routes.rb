@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pupil_has_lessons
+
   resources :pupils
 
   resources :lessons

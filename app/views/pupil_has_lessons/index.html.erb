@@ -1,0 +1,31 @@
+<h1>Listing pupil_has_lessons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pupil</th>
+      <th>Lesson</th>
+      <th>Payment</th>
+      <th>Adjusted price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pupil_has_lessons.each do |pupil_has_lesson| %>
+      <tr>
+        <td><%= pupil_has_lesson.pupil %></td>
+        <td><%= pupil_has_lesson.lesson %></td>
+        <td><%= pupil_has_lesson.payment %></td>
+        <td><%= pupil_has_lesson.adjusted_price %></td>
+        <td><%= link_to 'Show', pupil_has_lesson %></td>
+        <td><%= link_to 'Edit', edit_pupil_has_lesson_path(pupil_has_lesson) %></td>
+        <td><%= link_to 'Destroy', pupil_has_lesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pupil has lesson', new_pupil_has_lesson_path %>

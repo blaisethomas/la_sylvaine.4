@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pupil:</strong>
+  <%= @pupil_has_lesson.pupil %>
+</p>
+
+<p>
+  <strong>Lesson:</strong>
+  <%= @pupil_has_lesson.lesson %>
+</p>
+
+<p>
+  <strong>Payment:</strong>
+  <%= @pupil_has_lesson.payment %>
+</p>
+
+<p>
+  <strong>Adjusted price:</strong>
+  <%= @pupil_has_lesson.adjusted_price %>
+</p>
+
+<%= link_to 'Edit', edit_pupil_has_lesson_path(@pupil_has_lesson) %> |
+<%= link_to 'Back', pupil_has_lessons_path %>
