@@ -1,4 +1,5 @@
 ActiveAdmin.register PupilHasLesson do
+  permit_params :adjusted_price
 
 
   # See permitted parameters documentation:
