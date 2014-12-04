@@ -1,4 +1,5 @@
 ActiveAdmin.register Payment do
+  permit_params 
 
 
   # See permitted parameters documentation:
