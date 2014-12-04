@@ -1,4 +1,5 @@
 ActiveAdmin.register PupilHasYear do
+  permit_params :adjusted_price
 
 
   # See permitted parameters documentation:
