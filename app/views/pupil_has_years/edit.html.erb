@@ -1,6 +1,5 @@
-<h1>Editing pupil_has_year</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @pupil_has_year %> |
-<%= link_to 'Back', pupil_has_years_path %>
+<%- model_class = PupilHasYear -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => PupilHasYear %></h1>
+</div>
+<%= render :partial => 'form' %>
