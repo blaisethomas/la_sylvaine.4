@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :teachers
+
   resources :lesson_has_teachers
 
   resources :locations
