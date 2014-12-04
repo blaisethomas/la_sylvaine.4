@@ -1,4 +1,5 @@
 ActiveAdmin.register LessonHasTeacher do
+  permit_params 
 
 
   # See permitted parameters documentation:
