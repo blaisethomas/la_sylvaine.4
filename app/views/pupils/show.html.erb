@@ -1,79 +1,50 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Pupil -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Pupil %></h1>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @pupil.user %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:school) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.school %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:class_form) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.class_form %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:telephone_number) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.telephone_number %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:email) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.email %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:emergency_contact_name) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.emergency_contact_name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:emergency_contact_relationship) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.emergency_contact_relationship %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:emergency_contact_telephone) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.emergency_contact_telephone %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:previous_dancing_schools) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.previous_dancing_schools %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:most_recent_examination_taken) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.most_recent_examination_taken %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:exam_result) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.exam_result %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:medical_conditions) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.medical_conditions %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:first_name) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.first_name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:last_name) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.last_name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:birthday) %></dt>
+      <dd><pre class="prettyprint"><%= @pupil.birthday %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>School:</strong>
-  <%= @pupil.school %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              pupils_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_pupil_path(@pupil), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              pupil_path(@pupil),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Class form:</strong>
-  <%= @pupil.class_form %>
-</p>
-
-<p>
-  <strong>Telephone number:</strong>
-  <%= @pupil.telephone_number %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @pupil.email %>
-</p>
-
-<p>
-  <strong>Emergency contact name:</strong>
-  <%= @pupil.emergency_contact_name %>
-</p>
-
-<p>
-  <strong>Emergency contact relationship:</strong>
-  <%= @pupil.emergency_contact_relationship %>
-</p>
-
-<p>
-  <strong>Emergency contact telephone:</strong>
-  <%= @pupil.emergency_contact_telephone %>
-</p>
-
-<p>
-  <strong>Previous dancing schools:</strong>
-  <%= @pupil.previous_dancing_schools %>
-</p>
-
-<p>
-  <strong>Most recent examination taken:</strong>
-  <%= @pupil.most_recent_examination_taken %>
-</p>
-
-<p>
-  <strong>Exam result:</strong>
-  <%= @pupil.exam_result %>
-</p>
-
-<p>
-  <strong>Medical conditions:</strong>
-  <%= @pupil.medical_conditions %>
-</p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @pupil.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @pupil.last_name %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @pupil.birthday %>
-</p>
-
-<%= link_to 'Edit', edit_pupil_path(@pupil) %> |
-<%= link_to 'Back', pupils_path %>

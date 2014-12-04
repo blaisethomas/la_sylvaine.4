@@ -1,6 +1,5 @@
-<h1>Editing pupil</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @pupil %> |
-<%= link_to 'Back', pupils_path %>
+<%- model_class = Pupil -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => Pupil %></h1>
+</div>
+<%= render :partial => 'form' %>
