@@ -1,0 +1,27 @@
+<h1>Listing lesson_has_teachers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lesson</th>
+      <th>Teacher</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lesson_has_teachers.each do |lesson_has_teacher| %>
+      <tr>
+        <td><%= lesson_has_teacher.lesson %></td>
+        <td><%= lesson_has_teacher.teacher %></td>
+        <td><%= link_to 'Show', lesson_has_teacher %></td>
+        <td><%= link_to 'Edit', edit_lesson_has_teacher_path(lesson_has_teacher) %></td>
+        <td><%= link_to 'Destroy', lesson_has_teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lesson has teacher', new_lesson_has_teacher_path %>
