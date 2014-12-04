@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @pupil_has_year.year %>
+</p>
+
+<p>
+  <strong>Payment:</strong>
+  <%= @pupil_has_year.payment %>
+</p>
+
+<p>
+  <strong>Pupil:</strong>
+  <%= @pupil_has_year.pupil %>
+</p>
+
+<p>
+  <strong>Adjusted price:</strong>
+  <%= @pupil_has_year.adjusted_price %>
+</p>
+
+<%= link_to 'Edit', edit_pupil_has_year_path(@pupil_has_year) %> |
+<%= link_to 'Back', pupil_has_years_path %>

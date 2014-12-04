@@ -1,0 +1,14 @@
+<%= simple_form_for(@pupil_has_year) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :year %>
+    <%= f.association :payment %>
+    <%= f.association :pupil %>
+    <%= f.input :adjusted_price %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

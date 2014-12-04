@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pupil_has_years
+
   resources :years
 
   resources :payments
