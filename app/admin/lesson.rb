@@ -1,4 +1,5 @@
 ActiveAdmin.register Lesson do
+  permit_params :price, :genre, :grade
 
 
   # See permitted parameters documentation:
