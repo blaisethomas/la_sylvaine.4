@@ -29,6 +29,7 @@ class PupilsController < ApplicationController
   # POST /pupils.json
   def create
     @pupil = Pupil.new(pupil_params)
+    @pupil.user = current_user
 
     respond_to do |format|
       if @pupil.save
