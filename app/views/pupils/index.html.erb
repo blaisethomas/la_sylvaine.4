@@ -1,0 +1,53 @@
+<h1>Listing pupils</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>School</th>
+      <th>Class form</th>
+      <th>Telephone number</th>
+      <th>Email</th>
+      <th>Emergency contact name</th>
+      <th>Emergency contact relationship</th>
+      <th>Emergency contact telephone</th>
+      <th>Previous dancing schools</th>
+      <th>Most recent examination taken</th>
+      <th>Exam result</th>
+      <th>Medical conditions</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Birthday</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pupils.each do |pupil| %>
+      <tr>
+        <td><%= pupil.user %></td>
+        <td><%= pupil.school %></td>
+        <td><%= pupil.class_form %></td>
+        <td><%= pupil.telephone_number %></td>
+        <td><%= pupil.email %></td>
+        <td><%= pupil.emergency_contact_name %></td>
+        <td><%= pupil.emergency_contact_relationship %></td>
+        <td><%= pupil.emergency_contact_telephone %></td>
+        <td><%= pupil.previous_dancing_schools %></td>
+        <td><%= pupil.most_recent_examination_taken %></td>
+        <td><%= pupil.exam_result %></td>
+        <td><%= pupil.medical_conditions %></td>
+        <td><%= pupil.first_name %></td>
+        <td><%= pupil.last_name %></td>
+        <td><%= pupil.birthday %></td>
+        <td><%= link_to 'Show', pupil %></td>
+        <td><%= link_to 'Edit', edit_pupil_path(pupil) %></td>
+        <td><%= link_to 'Destroy', pupil, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pupil', new_pupil_path %>

@@ -1,0 +1,25 @@
+<%= simple_form_for(@pupil) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.input :school %>
+    <%= f.input :class_form %>
+    <%= f.input :telephone_number %>
+    <%= f.input :email %>
+    <%= f.input :emergency_contact_name %>
+    <%= f.input :emergency_contact_relationship %>
+    <%= f.input :emergency_contact_telephone %>
+    <%= f.input :previous_dancing_schools %>
+    <%= f.input :most_recent_examination_taken %>
+    <%= f.input :exam_result %>
+    <%= f.input :medical_conditions %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :birthday %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
