@@ -1,8 +1,26 @@
+ <% if @pupil_has_lesson.errors.any? %>
+    <div id="error_explanation">
+      <p><%= pluralize(@pupil_has_lesson.errors.count, "error") %> prohibited this lesson sign up from being saved:</p>
+
+      <ul>
+      <% @pupil_has_lesson.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <%= form_for @pupil_has_lesson, :html => { :class => 'form-horizontal form-model' } do |f| %>
   <div class="form-group">
     <%= f.label :adjusted_price, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
       <%= f.text_field :adjusted_price, :class => 'text-field form-control' %>
+    </div>
+    <div class="col-md-10">
+      <%= f.collection_select :lesson_id, Lesson.all, :id, :title %>
+    </div>
+    <div class="col-md-10">
+      <%= f.collection_select :pupil_id, Pupil.all, :id, :full_name %>
     </div>
   </div>
 

@@ -1,6 +1,14 @@
 <%= form_for @payment, :html => { :class => 'form-horizontal form-model' } do |f| %>
 
   <div class="form-group">
+    <div class="col-md-10">
+      <%= f.collection_select :year_id, Year.all, :id, :year %>
+    </div>
+    <div class="col-md-10">
+      <%= f.collection_select :pupil_id, Pupil.all, :id, :full_name %>
+    </div>
+
+    <%= f.text_field :amount %>
     <div class='col-md-offset-2 col-md-10'>
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
@@ -8,3 +16,13 @@
     </div>
   </div>
 <% end %>
+
+
+SELECT u.id AS user_id, u.first_name || ' ' || u.surname AS user_name,
+  COUNT(*) AS pupil_count,
+  SUM(COALESCE((SELECT SUM(adjusted_price) FROM pupil_has_years WHERE pupil_id = p.id AND payment_id IS NULL),0.0)) AS registration_total,
+  SUM(COALESCE((SELECT SUM(adjusted_price) FROM pupil_has_lessons WHERE pupil_id = p.id AND payment_id IS NULL), 0.0)) AS lesson_total
+  FROM users AS u
+   INNER JOIN pupils AS p ON u.id = p.user_id
+  GROUP BY u.id, u.first_name, u.surname
+  ORDER BY u.surname, u.first_name;

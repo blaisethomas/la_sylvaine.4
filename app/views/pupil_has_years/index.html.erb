@@ -2,10 +2,35 @@
 <div class="page-header">
   <h1><%=t '.title', :default => PupilHasYear %></h1>
 </div>
+
+before
+<table>
+  <tr>
+    <th></th>
+    <% @years.each do |y| %>
+      <th><%= y.year %></th>
+    <% end %>
+  </tr>
+  <% Pupil.all.each do |p| %>
+  <tr>
+    <td><%= p.full_name %></td>
+    <% @years.each do |y| %>
+      <% pmt = @payments.find_by_pupil_year(p.id, y.id) %>
+      <td style="background-color: <%=
+       pmt ? (pmt.amount ? "green" : "red") : "black" %>"><%= pmt ? link_to(pmt.amount.inspect, pmt.amount ? edit_payment_path(pmt) : new_payment_path(pupil_id: p.id, year_id: y.id)) : "X" %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+after
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
+      <th>Year</th>
+      <th>Pupil</th>
+      <th> Normal Price</th>
       <th><%= model_class.human_attribute_name(:adjusted_price) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -15,10 +40,13 @@
     <% @pupil_has_years.each do |pupil_has_year| %>
       <tr>
         <td><%= pupil_has_year.id %></td>
+        <td><%= pupil_has_year.year.year %></td>
+        <td><%= link_to pupil_has_year.pupil.full_name, edit_pupil_path(pupil_has_year.pupil) %></td>
+        <td><%= pupil_has_year.year.price %></td>
         <td><%= pupil_has_year.adjusted_price %></td>
         <td><%=l pupil_has_year.created_at, format: :long %></td>
         <td>
-          <%= link_to pupil_has_year_path(pupil_has_year), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+          <%= link_to edit_pupil_has_year_path(pupil_has_year), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
             <%= glyph 'info-sign' %>
             <%= glyph 'pencil' %>
           <%- end -%>

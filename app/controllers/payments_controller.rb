@@ -18,6 +18,17 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
+    @items = PupilHasLesson.find_by_sql("SELECT p.id AS pupil_id, pay.kind, pay.id, p.first_name, p.last_name,
+      pay.name, pay.adjusted_price
+     FROM pupils AS p INNER JOIN
+       (SELECT phy.pupil_id, y.id, 'R' AS kind, 'Registration for ' || y.year AS name, adjusted_price FROM years AS y INNER JOIN pupil_has_years AS phy ON y.id = phy.year_id WHERE payment_id IS NULL
+        UNION ALL
+        SELECT pupil_id, l.id, 'L' AS kind, l.genre || ' - ' || l.grade AS name, adjusted_price FROM lessons AS l INNER JOIN pupil_has_lessons AS phl ON l.id = phl.lesson_id WHERE payment_id IS NULL
+        ) AS pay
+      ON p.id = pay.pupil_id
+     WHERE p.user_id = 1
+     ORDER BY p.last_name, p.first_name;")
+
     @payment = Payment.new
   end
 

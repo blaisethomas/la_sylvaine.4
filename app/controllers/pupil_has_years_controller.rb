@@ -4,7 +4,22 @@ class PupilHasYearsController < ApplicationController
   # GET /pupil_has_years
   # GET /pupil_has_years.json
   def index
-    @pupil_has_years = PupilHasYear.all
+    @years = Year.all.to_a
+    @payments = PupilHasYear.find_by_sql("SELECT pupil_id, year_id, amount, adjusted_price FROM pupil_has_years AS phy LEFT OUTER JOIN payments AS p ON phy.payment_id = p.id;").to_a
+
+    # Convenience method to rapidly scan through and find a particular pupil_year
+    @payments.define_singleton_method(:find_by_pupil_year) do |*args|
+      puts args.inspect
+      self.each do |p|
+        if p.pupil_id == args[0] && p.year_id == args[1]
+          puts "YAY! #{p.inspect}"
+          return p
+        end
+      end
+      return nil
+    end
+
+    @pupil_has_years = PupilHasYear.all #.sort_by(:year, :pupil_id)
   end
 
   # GET /pupil_has_years/1
@@ -14,7 +29,8 @@ class PupilHasYearsController < ApplicationController
 
   # GET /pupil_has_years/new
   def new
-    @pupil_has_year = PupilHasYear.new
+    year = Year.last
+    @pupil_has_year = year.pupil_has_years.new(adjusted_price: year.price)
   end
 
   # GET /pupil_has_years/1/edit
@@ -28,7 +44,7 @@ class PupilHasYearsController < ApplicationController
 
     respond_to do |format|
       if @pupil_has_year.save
-        format.html { redirect_to @pupil_has_year, notice: 'Pupil has year was successfully created.' }
+        format.html { redirect_to pupil_has_years_path, notice: 'Pupil has year was successfully created.' }
         format.json { render :show, status: :created, location: @pupil_has_year }
       else
         format.html { render :new }
@@ -42,7 +58,7 @@ class PupilHasYearsController < ApplicationController
   def update
     respond_to do |format|
       if @pupil_has_year.update(pupil_has_year_params)
-        format.html { redirect_to @pupil_has_year, notice: 'Pupil has year was successfully updated.' }
+        format.html { redirect_to pupil_has_years_path, notice: 'Pupil has year was successfully updated.' }
         format.json { render :show, status: :ok, location: @pupil_has_year }
       else
         format.html { render :edit }

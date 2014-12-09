@@ -6,6 +6,8 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>Pupil</th>
+      <th> Normal Price</th>
       <th><%= model_class.human_attribute_name(:adjusted_price) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -15,10 +17,13 @@
     <% @pupil_has_lessons.each do |pupil_has_lesson| %>
       <tr>
         <td><%= pupil_has_lesson.id %></td>
+        <td><%= link_to pupil_has_lesson.pupil.full_name, edit_pupil_path(pupil_has_lesson.pupil) %></td>
+        <td><%= pupil_has_lesson.lesson.price %></td>
         <td><%= pupil_has_lesson.adjusted_price %></td>
+
         <td><%=l pupil_has_lesson.created_at, format: :long %></td>
         <td>
-          <%= link_to pupil_has_lesson_path(pupil_has_lesson), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+          <%= link_to edit_pupil_has_lesson_path(pupil_has_lesson), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
             <%= glyph 'info-sign' %>
             <%= glyph 'pencil' %>
           <%- end -%>

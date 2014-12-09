@@ -2,5 +2,27 @@
 <div class="page-header">
   <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => Payment %></h1>
 </div>
-<%= render :partial => 'form' %>
+<%#= render :partial => 'form' %>
 
+What the hell you're paying for:
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Pupil name</th>
+      <th>What it is</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |i| %>
+      <tr>
+        <td><%= i.first_name%> <%= i.last_name%></td>
+        <td><%= i.name%> </td>
+        <td><%= i.adjusted_price%></td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+</table>

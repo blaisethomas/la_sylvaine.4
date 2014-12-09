@@ -14,7 +14,8 @@ class PupilHasLessonsController < ApplicationController
 
   # GET /pupil_has_lessons/new
   def new
-    @pupil_has_lesson = PupilHasLesson.new
+    lesson = Lesson.last
+    @pupil_has_lesson = PupilHasLesson.new(adjusted_price: lesson.price)
   end
 
   # GET /pupil_has_lessons/1/edit
@@ -28,7 +29,7 @@ class PupilHasLessonsController < ApplicationController
 
     respond_to do |format|
       if @pupil_has_lesson.save
-        format.html { redirect_to @pupil_has_lesson, notice: 'Pupil has lesson was successfully created.' }
+        format.html { redirect_to pupil_has_lessons_path, notice: 'Pupil has lesson was successfully created.' }
         format.json { render :show, status: :created, location: @pupil_has_lesson }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class PupilHasLessonsController < ApplicationController
   def update
     respond_to do |format|
       if @pupil_has_lesson.update(pupil_has_lesson_params)
-        format.html { redirect_to @pupil_has_lesson, notice: 'Pupil has lesson was successfully updated.' }
+        format.html { redirect_to pupil_has_lessons_path, notice: 'Pupil has lesson was successfully updated.' }
         format.json { render :show, status: :ok, location: @pupil_has_lesson }
       else
         format.html { render :edit }

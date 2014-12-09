@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20141204042944) do
 
   create_table "payments", force: true do |t|
     t.integer  "user_id"
+    t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
