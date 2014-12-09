@@ -53,7 +53,12 @@ RSpec.describe PupilsController, :type => :controller do
   end
 
   describe "GET new" do
+    it "should render the correct template" do
+      get :new, {}, valid_session
+      expect(response).to render_template(:new)
+    end
     it "assigns a new pupil as @pupil" do
+
       get :new, {}, valid_session
       expect(assigns(:pupil)).to be_a_new(Pupil)
     end
@@ -70,6 +75,7 @@ RSpec.describe PupilsController, :type => :controller do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Pupil" do
+        @pupil = FactoryGirl.build(:pupil)
         expect {
           post :create, {:pupil => valid_attributes}, valid_session
         }.to change(Pupil, :count).by(1)
