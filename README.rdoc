@@ -4,3 +4,13 @@
 * Ruby 2.1.2
 * pgsql
 * scaffolded using prelang.com 
+
+git clone https://github.com/blaisethomas/la_sylvaine.4.git
+bundle install
+rake db:migrate
+
+Admin User (/admin)
+u:admin@example.com
+p:password
+
+

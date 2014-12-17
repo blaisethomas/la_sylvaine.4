@@ -1,13 +1,34 @@
 <%- model_class = PupilHasLesson -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => PupilHasLesson %></h1>
+  <h1>Lesson Enrollments</h1>
 </div>
+<table>
+  <tr>
+    <th></th>
+    <% @lessons.each do |l| %>
+      <th><%= l.genre %> <%=l.grade%></th>
+    <% end %>
+  </tr>
+  <% Pupil.all.each do |p| %>
+  <tr>
+    <td><%= p.full_name %></td>
+    <% @lessons.each do |l| %>
+      <% pmt = @payments.find_by_pupil_lesson(p.id, l.id) %>
+      <%#= raise l.id.inspect %>
+      <td style="background-color: <%=
+       pmt ? (pmt.adjusted_price ? "green" : "red") : "black" %>"><%= pmt ? link_to(pmt.adjusted_price.inspect, pmt.adjusted_price ? edit_payment_path(pmt) : new_payment_path(pupil_id: p.id, lesson_id: l.id)) : "X" %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
       <th>Pupil</th>
-      <th> Normal Price</th>
+      <th>Class</th>
+      <th>Normal Price</th>
       <th><%= model_class.human_attribute_name(:adjusted_price) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -18,6 +39,7 @@
       <tr>
         <td><%= pupil_has_lesson.id %></td>
         <td><%= link_to pupil_has_lesson.pupil.full_name, edit_pupil_path(pupil_has_lesson.pupil) %></td>
+        <td><%= link_to pupil_has_lesson.lesson.genre, lessons_path(pupil_has_lesson.lesson.genre)%> Grade <%= pupil_has_lesson.lesson.grade%></td>
         <td><%= pupil_has_lesson.lesson.price %></td>
         <td><%= pupil_has_lesson.adjusted_price %></td>
 

@@ -5,7 +5,13 @@ class PupilHasYearsController < ApplicationController
   # GET /pupil_has_years.json
   def index
     @years = Year.all.to_a
-    @payments = PupilHasYear.find_by_sql("SELECT pupil_id, year_id, amount, adjusted_price FROM pupil_has_years AS phy LEFT OUTER JOIN payments AS p ON phy.payment_id = p.id;").to_a
+    @payments = PupilHasYear.find_by_sql("SELECT pupil_id, year_id, amount, adjusted_price
+     FROM pupil_has_years AS phy
+      INNER JOIN pupils AS pu
+      ON pu.id = phy.pupil_id
+      LEFT OUTER JOIN payments AS p
+       ON phy.payment_id = p.id
+     WHERE pu.user_id=#{current_user.id};").to_a
 
     # Convenience method to rapidly scan through and find a particular pupil_year
     @payments.define_singleton_method(:find_by_pupil_year) do |*args|
@@ -19,7 +25,7 @@ class PupilHasYearsController < ApplicationController
       return nil
     end
 
-    @pupil_has_years = PupilHasYear.all #.sort_by(:year, :pupil_id)
+   @pupil_has_years = PupilHasYear.all #.sort_by(:year, :pupil_id)
   end
 
   # GET /pupil_has_years/1

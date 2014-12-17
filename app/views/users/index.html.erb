@@ -1,0 +1,21 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Pupil Count</th>
+      <th>Owe</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td rowspan="2"><%= link_to u.user_name, new_payment_path(user_id: u.user_id) %></td>
+        <td rowspan="2"><%= u.pupil_count %></td>
+        <td colspan="2"><%= u.registration_total + u.lesson_total %></td>
+      </tr>
+      <tr>
+        <td><%= u.registration_total %></td><td><%= u.lesson_total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

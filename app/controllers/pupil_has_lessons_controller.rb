@@ -5,6 +5,20 @@ class PupilHasLessonsController < ApplicationController
   # GET /pupil_has_lessons.json
   def index
     @pupil_has_lessons = PupilHasLesson.all
+    @lessons = Lesson.all.to_a
+    @payments = PupilHasLesson.find_by_sql("SELECT * FROM pupil_has_lessons;").to_a
+
+
+    @payments.define_singleton_method(:find_by_pupil_lesson) do |*args|
+      puts args.inspect
+      self.each do |l|
+        if l.lesson_id == args[0] && l.lesson_id == args[1]
+          puts "#{l.inspect}"
+          return l
+        end
+      end
+      return nil
+    end
   end
 
   # GET /pupil_has_lessons/1
